@@ -1,0 +1,55 @@
+```bash
+npx create-react-app government-api-app
+cd government-api-app
+```
+
+Next, let's update the `src/App.js` file to interact with the government HTTP APIs:
+
+```javascript
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+
+function App() {
+ const [data, setData] = useState([]);
+ const [selected, setSelected] = useState(null);
+
+ useEffect(() => {
+   // replace with your API URL
+   axios.get("http://www.example.com/api")
+     .then(res => {
+       setData(res.data);
+     })
+ }, []);
+
+ const onChange = (e) => {
+   axios.get(`http://www.example.com/api/${e.target.value}`)
+     .then(res => {
+       setSelected(res.data);
+     })
+ }
+
+ return (
+   <div className="App">
+     <header className="App-header">
+       <h1>Government API Interrogator</h1>
+
+       <select onChange={onChange}>
+         <option disabled selected>Select Option</option>
+         {data.map(item => (
+           <option value={item.id}>{item.name}</option>
+         ))}
+       </select>
+
+       {selected && (
+         <div>
+           <h2>{selected.name}</h2>
+           <p>{selected.description}</p>
+         </div>
+       )}
+     </header>
+   </div>
+ );
+}
+
+export default App;
+```
