@@ -3,8 +3,6 @@ npx create-react-app government-api-app
 cd government-api-app
 ```
 
-Next, let's update the `src/App.js` file to interact with the government HTTP APIs:
-
 ```javascript
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
